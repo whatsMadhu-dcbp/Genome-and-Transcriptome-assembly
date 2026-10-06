@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#SBATCH --cpus-per-task=16
+#SBATCH --mem=64G
+#SBATCH --time=1-00:00:00
+#SBATCH --job-name=trinity
+#SBATCH --output=/data/users/mmahapatra/assembly_annotation_course/log/output_trinity_%j.o
+#SBATCH --error=/data/users/mmahapatra/assembly_annotation_course/log/error_trinity_%j.e
+#SBATCH --partition=pibu_el8
+
+module load Trinity 
+
+WORKDIR="/data/users/mmahapatra/assembly_annotation_course"                                                 
+RNASEQ_LEFT="$WORKDIR/RNAseq_Sha/ERR754081_1.fastq.gz"
+RNASEQ_RIGHT="$WORKDIR/RNAseq_Sha/ERR754081_2.fastq.gz"
+
+Trinity \
+--seqType fq --left $RNASEQ_LEFT --right $RNASEQ_RIGHT --CPU 16 --max_memory 64G
